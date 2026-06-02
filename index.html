@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Kostenloser, schöner QR-Code-Generator von Musaj GmbH. Erstelle individuelle QR-Codes für Links, WLAN, Kontakte, E-Mail und mehr — mit Logo, Farben, Verläufen, Rahmen und Stapelverarbeitung. Ohne Anmeldung." />
+    <meta name="theme-color" content="#6d5efc" />
+    <title>QR Code Studio — Schöne QR-Codes von Musaj GmbH</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%236d5efc'/%3E%3Cg fill='white'%3E%3Crect x='20' y='20' width='22' height='22' rx='5'/%3E%3Crect x='58' y='20' width='22' height='22' rx='5'/%3E%3Crect x='20' y='58' width='22' height='22' rx='5'/%3E%3Crect x='58' y='58' width='10' height='10' rx='2'/%3E%3Crect x='70' y='70' width='10' height='10' rx='2'/%3E%3C/g%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="assets/app.css" />
+  </head>
+  <body>
+    <div class="bg-orbs" aria-hidden="true">
+      <span class="orb orb-1"></span>
+      <span class="orb orb-2"></span>
+      <span class="orb orb-3"></span>
+    </div>
+
+    <header class="site-header">
+      <a class="brand" href="#">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 100 100" width="34" height="34">
+            <rect width="100" height="100" rx="22" fill="url(#bg)"/>
+            <defs>
+              <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#7b6cff"/>
+                <stop offset="1" stop-color="#41c6ff"/>
+              </linearGradient>
+            </defs>
+            <g fill="#fff">
+              <rect x="20" y="20" width="22" height="22" rx="5"/>
+              <rect x="58" y="20" width="22" height="22" rx="5"/>
+              <rect x="20" y="58" width="22" height="22" rx="5"/>
+              <rect x="58" y="58" width="10" height="10" rx="2"/>
+              <rect x="70" y="70" width="10" height="10" rx="2"/>
+            </g>
+          </svg>
+        </span>
+        <span class="brand-text">QR&nbsp;Code <strong>Studio</strong></span>
+      </a>
+      <nav class="site-nav">
+        <a href="#how" data-i18n="nav.how">Anleitung</a>
+        <a href="#faq" data-i18n="nav.faq">FAQ</a>
+        <div class="lang-switch" role="group" aria-label="Sprache / Language">
+          <button class="lang-btn is-active" data-lang="de">DE</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <a class="nav-cta" href="https://musaj.com" target="_blank" rel="noopener">Musaj.com ↗</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <p class="eyebrow" data-i18n="hero.eyebrow">✨ Kostenlos · Ohne Anmeldung · Offline nutzbar</p>
+        <h1 data-i18n-html="hero.h1">Erstelle QR-Codes, die man <span class="grad-text">wirklich scannen</span> will</h1>
+        <p class="hero-sub" data-i18n="hero.sub">Gestalte gebrandete, farbige QR-Codes in Sekunden — für Links, WLAN, Kontakte und mehr. Füge dein Logo hinzu, wähle deinen Stil, lade in HD herunter. Alles in deinem Browser.</p>
+      </section>
+
+      <section class="studio" id="studio">
+        <!-- LEFT: controls -->
+        <div class="panel controls">
+          <!-- Content type tabs -->
+          <div class="tabs" role="tablist" aria-label="Inhaltstyp">
+            <button class="tab is-active" data-type="url" data-i18n="tab.url">🔗 Link</button>
+            <button class="tab" data-type="text" data-i18n="tab.text">📝 Text</button>
+            <button class="tab" data-type="email" data-i18n="tab.email">✉️ E-Mail</button>
+            <button class="tab" data-type="phone" data-i18n="tab.phone">📞 Telefon</button>
+            <button class="tab" data-type="sms" data-i18n="tab.sms">💬 SMS</button>
+            <button class="tab" data-type="whatsapp" data-i18n="tab.whatsapp">🟢 WhatsApp</button>
+            <button class="tab" data-type="wifi" data-i18n="tab.wifi">📶 WLAN</button>
+            <button class="tab" data-type="vcard" data-i18n="tab.vcard">👤 Kontakt</button>
+            <button class="tab" data-type="geo" data-i18n="tab.geo">📍 Standort</button>
+            <button class="tab" data-type="batch" data-i18n="tab.batch">📦 Stapel</button>
+          </div>
+
+          <!-- Dynamic content fields -->
+          <div class="fields" id="fields"></div>
+
+          <!-- Style presets -->
+          <div class="group">
+            <div class="group-title"><span data-i18n="grp.presets">🎨 Stil-Vorlagen</span> <span class="hint" data-i18n="grp.presetsHint">Looks mit einem Klick</span></div>
+            <div class="presets" id="presets"></div>
+          </div>
+
+          <!-- Customization -->
+          <details class="group" open>
+            <summary class="group-title" data-i18n="grp.customize">⚙️ Anpassen</summary>
+            <div class="grid2">
+              <label class="field">
+                <span data-i18n="cz.dotStyle">Punkt-Stil</span>
+                <select id="dotsType">
+                  <option value="rounded" data-i18n="opt.rounded">Abgerundet</option>
+                  <option value="dots" data-i18n="opt.dots">Punkte</option>
+                  <option value="classy" data-i18n="opt.classy">Edel</option>
+                  <option value="classy-rounded" data-i18n="opt.classyRounded">Edel abgerundet</option>
+                  <option value="square" data-i18n="opt.square">Quadrat</option>
+                  <option value="extra-rounded" data-i18n="opt.extraRounded">Extra rund</option>
+                </select>
+              </label>
+              <label class="field">
+                <span data-i18n="cz.cornerStyle">Ecken-Stil</span>
+                <select id="cornerType">
+                  <option value="extra-rounded" data-i18n="opt.extraRounded">Extra rund</option>
+                  <option value="dot" data-i18n="opt.dot">Punkt</option>
+                  <option value="square" data-i18n="opt.square">Quadrat</option>
+                </select>
+              </label>
+
+              <label class="field color">
+                <span data-i18n="cz.dotsColor">Punkt-Farbe</span>
+                <input type="color" id="dotsColor" value="#2b2540" />
+              </label>
+              <label class="field color">
+                <span data-i18n="cz.cornerColor">Ecken-Farbe</span>
+                <input type="color" id="cornersColor" value="#6d5efc" />
+              </label>
+
+              <label class="field switch-row">
+                <span data-i18n="cz.gradient">Farbverlauf</span>
+                <input type="checkbox" id="useGradient" class="switch" />
+              </label>
+              <label class="field color" id="gradient2Wrap" hidden>
+                <span data-i18n="cz.gradient2">2. Verlaufsfarbe</span>
+                <input type="color" id="dotsColor2" value="#41c6ff" />
+              </label>
+
+              <label class="field color">
+                <span data-i18n="cz.background">Hintergrund</span>
+                <input type="color" id="bgColor" value="#ffffff" />
+              </label>
+              <label class="field switch-row">
+                <span data-i18n="cz.transparent">Transparent</span>
+                <input type="checkbox" id="transparent" class="switch" />
+              </label>
+
+              <label class="field">
+                <span data-i18n="cz.ec">Fehlerkorrektur</span>
+                <select id="ecLevel">
+                  <option value="L" data-i18n="opt.ecL">Niedrig (L)</option>
+                  <option value="M" selected data-i18n="opt.ecM">Mittel (M)</option>
+                  <option value="Q" data-i18n="opt.ecQ">Quartil (Q)</option>
+                  <option value="H" data-i18n="opt.ecH">Hoch (H) · ideal für Logos</option>
+                </select>
+              </label>
+              <label class="field">
+                <span><span data-i18n="cz.size">Größe</span>: <b id="sizeVal">600</b>px</span>
+                <input type="range" id="size" min="200" max="1200" step="40" value="600" />
+              </label>
+            </div>
+          </details>
+
+          <!-- Frame / call to action -->
+          <details class="group">
+            <summary class="group-title" data-i18n="grp.frame">🏷️ Rahmen &amp; Call-to-Action</summary>
+            <label class="field switch-row">
+              <span data-i18n="fr.enable">Rahmen anzeigen</span>
+              <input type="checkbox" id="useFrame" class="switch" />
+            </label>
+            <div class="grid2">
+              <label class="field">
+                <span data-i18n="fr.text">Aufruf-Text</span>
+                <input type="text" id="frameText" value="Jetzt scannen" maxlength="40" />
+              </label>
+              <label class="field color">
+                <span data-i18n="fr.color">Rahmenfarbe</span>
+                <input type="color" id="frameColor" value="#6d5efc" />
+              </label>
+            </div>
+          </details>
+
+          <!-- Logo -->
+          <details class="group">
+            <summary class="group-title" data-i18n="grp.logo">🖼️ Logo</summary>
+            <div class="logo-row">
+              <label class="btn ghost upload">
+                <span data-i18n="logo.upload">Logo hochladen</span>
+                <input type="file" id="logoInput" accept="image/*" hidden />
+              </label>
+              <button class="btn link" id="removeLogo" data-i18n="logo.remove" hidden>Entfernen</button>
+            </div>
+            <div class="grid2">
+              <label class="field">
+                <span><span data-i18n="logo.size">Logo-Größe</span>: <b id="logoSizeVal">0.4</b></span>
+                <input type="range" id="logoSize" min="0.1" max="0.6" step="0.05" value="0.4" />
+              </label>
+              <label class="field switch-row">
+                <span data-i18n="logo.hideDots">Punkte hinter Logo ausblenden</span>
+                <input type="checkbox" id="hideBgDots" class="switch" checked />
+              </label>
+            </div>
+          </details>
+
+          <!-- Save & reuse -->
+          <details class="group">
+            <summary class="group-title" data-i18n="grp.save">💾 Speichern &amp; wiederverwenden</summary>
+            <div class="save-row">
+              <input type="text" id="slotName" data-i18n-ph="save.name" placeholder="Name dieses Designs" maxlength="30" />
+              <button class="btn" id="saveSlot" data-i18n="save.btn">Speichern</button>
+            </div>
+            <div class="slots" id="slots"></div>
+          </details>
+        </div>
+
+        <!-- RIGHT: preview -->
+        <div class="panel preview">
+          <div class="preview-stage">
+            <div class="qr-frame" id="qrFrame">
+              <div id="qr" class="qr-canvas"></div>
+              <div class="qr-cta" id="qrCta"></div>
+            </div>
+          </div>
+          <p class="preview-note" id="previewNote" data-i18n="prev.note">Vor dem Download zum Testen scannen 👇</p>
+          <div class="downloads">
+            <button class="btn primary" data-dl="png">⬇️ PNG</button>
+            <button class="btn" data-dl="svg">SVG</button>
+            <button class="btn" data-dl="jpeg">JPEG</button>
+            <button class="btn ghost" id="copyBtn" data-i18n="prev.copy">📋 Kopieren</button>
+          </div>
+          <p class="tiny muted" data-i18n="prev.exportNote">PNG &amp; JPEG werden in der gewählten Größe exportiert. SVG ist beliebig skalierbar — perfekt für den Druck.</p>
+        </div>
+      </section>
+
+      <!-- BATCH -->
+      <section class="batch" id="batchPanel" hidden>
+        <div class="batch-head">
+          <h2 data-i18n="batch.title">Stapelverarbeitung</h2>
+          <div class="batch-actions">
+            <button class="btn" id="batchBuild" data-i18n="batch.build">Vorschau erstellen</button>
+            <button class="btn primary" id="batchDownload" data-i18n="batch.downloadAll">Alle als PNG herunterladen</button>
+          </div>
+        </div>
+        <p class="tiny muted" id="batchNote"></p>
+        <p class="tiny muted" data-i18n="batch.note">Tipp: Beim Herunterladen mehrerer Dateien fragt der Browser einmal nach Erlaubnis.</p>
+        <div class="batch-grid" id="batchGrid"></div>
+      </section>
+
+      <!-- HOW IT WORKS -->
+      <section class="content" id="how">
+        <h2 data-i18n="how.title">So funktioniert's</h2>
+        <div class="steps">
+          <div class="step"><span class="num">1</span><h3 data-i18n="how.s1t">Typ wählen</h3><p data-i18n="how.s1p">Wähle, was der Code tun soll: Link, WLAN, Kontaktkarte oder E-Mail.</p></div>
+          <div class="step"><span class="num">2</span><h3 data-i18n="how.s2t">Mach ihn zu deinem</h3><p data-i18n="how.s2p">Farben, Verläufe, runde Punkte und dein Logo in der Mitte.</p></div>
+          <div class="step"><span class="num">3</span><h3 data-i18n="how.s3t">Herunterladen &amp; teilen</h3><p data-i18n="how.s3p">Exportiere scharfes PNG/JPEG oder Vektor-SVG. Für Druck oder Bildschirm.</p></div>
+        </div>
+      </section>
+
+      <!-- TIPS -->
+      <section class="content tips">
+        <h2 data-i18n="tips.title">Tipps für scanbare Codes</h2>
+        <ul class="tip-list">
+          <li data-i18n="tips.t1">✅ Starker Kontrast zwischen Punkten und Hintergrund.</li>
+          <li data-i18n-html="tips.t2">✅ Mit Logo? Stelle die Fehlerkorrektur auf <b>Hoch (H)</b>.</li>
+          <li data-i18n-html="tips.t3">✅ Für Druck <b>SVG</b> oder großes PNG (800px+) exportieren.</li>
+          <li data-i18n="tips.t4">✅ Teste immer mit der Handykamera vor der Veröffentlichung.</li>
+        </ul>
+      </section>
+
+      <!-- FAQ -->
+      <section class="content" id="faq">
+        <h2 data-i18n="faq.title">Häufige Fragen</h2>
+        <details class="faq"><summary data-i18n="faq.q1">Ist es wirklich kostenlos?</summary><p data-i18n="faq.a1">Ja. Kein Konto, kein Wasserzeichen, keine Limits. Erstellt von der Musaj GmbH.</p></details>
+        <details class="faq"><summary data-i18n="faq.q2">Laufen meine Codes ab?</summary><p data-i18n="faq.a2">Niemals. Das sind statische QR-Codes — die Daten stecken im Code selbst und funktionieren für immer.</p></details>
+        <details class="faq"><summary data-i18n="faq.q3">Sind meine Daten privat?</summary><p data-i18n="faq.a3">Absolut. Alles läuft in deinem Browser. Nichts, was du eingibst, wird auf einen Server geladen.</p></details>
+        <details class="faq"><summary data-i18n="faq.q4">Darf ich sie kommerziell nutzen?</summary><p data-i18n="faq.a4">Auf jeden Fall — auf Verpackungen, Flyern, Menüs, Visitenkarten, überall.</p></details>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p><span data-i18n="foot.made">Mit 💜 erstellt von</span> <a href="https://musaj.com" target="_blank" rel="noopener">Musaj GmbH</a> · QR Code Studio</p>
+      <p class="tiny muted" data-i18n="foot.privacy">Läuft zu 100% in deinem Browser — deine Daten bleiben bei dir.</p>
+    </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="assets/vendor/qr-code-styling.js"></script>
+    <script src="assets/app.js"></script>
+  </body>
+</html>
